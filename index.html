@@ -1,81 +1,354 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Website Desa</title>
-    <link rel="icon" type="image/png" href="/favicon.png" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Desa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Dropdown style */
+    .group:hover .dropdown-content {
+      display: block;
+    }
 
-  <body class="bg-white text-gray-900">
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #1a1a1a;
+      min-width: 10rem;
+      z-index: 50;
+      border-radius: 0.25rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
 
-    <!-- Google Translate Widget -->
-    <div id="google_translate_element"></div>
+    .dropdown-content a:hover {
+      background-color: #2d2d2d;
+    }
 
-    <!-- React App -->
-    <div id="root"></div>
+    .nav-link {
+      color: #ffffff;
+      padding: 0.5rem 0.75rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
 
-    <!-- Vite main script -->
-    <script type="module" src="/src/main.jsx"></script>
+    .nav-link:hover {
+      color: #8DB600;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-white">
 
-    <!-- Google Translate Script -->
-    <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'id',
-          includedLanguages: 'en,id',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
-      }
-    </script>
+  <!-- Header Start -->
+  <header class="bg-[#161616] fixed w-full z-50 shadow-md">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="text-[#8DB600] font-bold text-lg">Rasau Jaya Tiga</div>
 
-    <!-- Load Translate API -->
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+      <!-- DESKTOP NAV -->
+      <nav class="hidden md:flex space-x-6 items-center">
+        <a href="#" class="nav-link">Beranda</a>
 
-    <!-- Custom Language Switch Confirmation -->
-    <script>
-      document.addEventListener("click", function (e) {
-        const el = e.target.closest(".goog-te-menu2-item span.text");
-        if (el) {
-          e.preventDefault();
-          const selectedLang = el.innerText.trim();
-          const message = selectedLang === "English"
-            ? "Do you want to switch the language to English?"
-            : "Apakah Anda ingin mengganti bahasa ke Bahasa Indonesia?";
-          if (confirm(message)) {
-            el.click();
-          }
-        }
-      }, true);
-    </script>
+        <div class="relative group">
+          <span class="nav-link cursor-pointer">Profil Desa</span>
+          <div class="dropdown-content py-2">
+            <a href="#" class="block px-4 py-2 nav-link">Sejarah</a>
+            <a href="#" class="block px-4 py-2 nav-link">Visi & Misi</a>
+            <a href="#" class="block px-4 py-2 nav-link">Geografis</a>
+          </div>
+        </div>
 
-    <style>
-      #google_translate_element {
-        position: fixed;
-        top: 80px;
-        right: 10px;
-        z-index: 30;
-        background-color: white;
-        border-radius: 6px;
-        padding: 4px 6px;
-      }
+        <div class="relative group">
+          <span class="nav-link cursor-pointer">Pemerintahan</span>
+          <div class="dropdown-content py-2 w-52">
+            <a href="#" class="block px-4 py-2 nav-link">Struktur Organisasi</a>
+            <a href="#" class="block px-4 py-2 nav-link">Perangkat Desa</a>
+          </div>
+        </div>
 
-      @media (max-width: 768px) {
-        #google_translate_element {
-          top: auto;
-          bottom: 10px;
-          right: 10px;
-        }
-      }
+        <a href="#" class="nav-link">Layanan</a>
+        <a href="#" class="nav-link">Berita</a>
+        <a href="#" class="nav-link">Galeri</a>
+        <a href="#" class="nav-link">Kontak</a>
+      </nav>
 
-      .goog-te-banner-frame.skiptranslate,
-      .goog-te-gadget-icon {
-        display: none !important;
-      }
+      <!-- MOBILE HAMBURGER -->
+      <div class="md:hidden">
+        <button id="menu-toggle" class="text-white focus:outline-none">
+          ☰
+        </button>
+      </div>
+    </div>
 
-      body {
-        top: 0px !important;
-      }
-    </style>
-  </body>
+    <!-- MOBILE NAV -->
+    <div id="mobile-menu" class="md:hidden hidden bg-[#161616] px-4 pb-4">
+      <a href="#" class="block nav-link">Beranda</a>
+      <div>
+        <span class="block nav-link">Profil Desa</span>
+        <div class="pl-4">
+          <a href="#" class="block nav-link">Sejarah</a>
+          <a href="#" class="block nav-link">Visi & Misi</a>
+          <a href="#" class="block nav-link">Geografis</a>
+        </div>
+      </div>
+      <div>
+        <span class="block nav-link">Pemerintahan</span>
+        <div class="pl-4">
+          <a href="#" class="block nav-link">Struktur Organisasi</a>
+          <a href="#" class="block nav-link">Perangkat Desa</a>
+        </div>
+      </div>
+      <a href="#" class="block nav-link">Layanan</a>
+      <a href="#" class="block nav-link">Berita</a>
+      <a href="#" class="block nav-link">Galeri</a>
+      <a href="#" class="block nav-link">Kontak</a>
+    </div>
+  </header>
+
+  <!-- Main content -->
+<main class="mt-0">
+  <section class="relative w-full h-screen overflow-hidden">
+    <!-- 🎥 Background Video -->
+    <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay muted loop playsinline>
+      <source src="video-desa.MP4" type="video/mp4" />
+      Browser Anda tidak mendukung video.
+    </video>
+
+    <!-- 🔲 Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+
+    <!-- 📝 Hero Content -->
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+      <h1 class="text-white text-4xl md:text-6xl font-bold mb-4">
+        Selamat Datang di Website Resmi <br /> Desa Rasau Jaya Tiga
+      </h1>
+      <p class="text-[#e0e0e0] text-lg md:text-xl mb-6">
+        Rasau Jaya – Kubu Raya, Kalimantan Barat
+      </p>
+      <a href="#profil" class="bg-[#8DB600] text-black font-semibold px-6 py-3 rounded-full hover:bg-[#6f9900] transition">
+        Lihat Profil Desa
+      </a>
+    </div>
+  </section>
+  <section class="bg-[#000000] py-16 px-4" id="layanan">
+  <div class="max-w-7xl mx-auto text-center mb-12">
+    <h2 class="text-3xl md:text-4xl font-bold text-[#FFFFFF]">Layanan Warga</h2>
+    <p class="text-[#e0e0e0] mt-2">Berbagai layanan yang tersedia untuk masyarakat Desa Rasau Jaya Tiga</p>
+  </div>
+
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <!-- Kartu Layanan 1 -->
+    <div class="bg-[#8DB600] text-white rounded-xl shadow-md p-6 hover:scale-105 transition transform duration-300">
+      <div class="text-4xl mb-4">
+        📄
+      </div>
+      <h3 class="text-xl font-semibold mb-2">Layanan Surat</h3>
+      <p class="text-sm text-[#FFFFFF]">Permohonan surat domisili, usaha, dan lainnya secara online.</p>
+    </div>
+
+    <!-- Kartu Layanan 2 -->
+    <div class="bg-[#8DB600] text-white rounded-xl shadow-md p-6 hover:scale-105 transition transform duration-300">
+      <div class="text-4xl mb-4">
+        📦
+      </div>
+      <h3 class="text-xl font-semibold mb-2">Potensi Desa</h3>
+      <p class="text-sm text-[#FFFFFF]">Informasi potensi lokal seperti UMKM, pertanian, dan pariwisata.</p>
+    </div>
+
+    <!-- Kartu Layanan 3 -->
+    <div class="bg-[#8DB600] text-white rounded-xl shadow-md p-6 hover:scale-105 transition transform duration-300">
+      <div class="text-4xl mb-4">
+        🏗️
+      </div>
+      <h3 class="text-xl font-semibold mb-2">Pembangunan</h3>
+      <p class="text-sm text-[#FFFFFF]">Rencana dan laporan proyek pembangunan desa secara transparan.</p>
+    </div>
+
+    <!-- Kartu Layanan 4 -->
+    <div class="bg-[#8DB600] text-white rounded-xl shadow-md p-6 hover:scale-105 transition transform duration-300">
+      <div class="text-4xl mb-4">
+        💰
+      </div>
+      <h3 class="text-xl font-semibold mb-2">Keuangan Desa</h3>
+      <p class="text-sm text-[#FFFFFF]">Anggaran dan realisasi keuangan desa yang bisa diakses warga.</p>
+    </div>
+  </div>
+</section>
+<section class="py-16 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <!-- Kolom Informasi Terbaru -->
+    <div class="lg:col-span-2 space-y-6">
+      <h2 class="text-3xl font-bold text-gray-800 border-b-4 border-lime-600 pb-2">Informasi Terbaru</h2>
+
+      <!-- Kartu Informasi -->
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <img src="https://via.placeholder.com/600x300" alt="Pelatihan Digitalisasi" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-lime-700 mb-2">Pelatihan Digitalisasi</h3>
+          <p class="text-gray-700 mb-2">Kegiatan pelatihan website desa berlangsung sukses pada 25 Juli 2025 di Balai Desa Rasau Jaya Tiga.</p>
+          <span class="text-sm text-gray-500">Dipublikasikan pada: 26 Juli 2025</span>
+        </div>
+      </div>
+
+      <!-- Tambahkan lebih banyak informasi di sini -->
+    </div>
+
+    <!-- Kolom Pengumuman dan Agenda -->
+    <div class="space-y-6">
+      <h2 class="text-3xl font-bold text-gray-800 border-b-4 border-lime-600 pb-2">Agenda & Pengumuman</h2>
+
+      <div class="bg-white p-5 rounded-lg shadow-md">
+        <h4 class="text-lg font-semibold text-lime-600 mb-2">Agenda Mingguan</h4>
+        <ul class="list-disc list-inside text-gray-700 space-y-1">
+          <li>01 Agustus 2025 - Gotong Royong Bersama</li>
+          <li>03 Agustus 2025 - Sosialisasi UMKM Digital</li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-5 rounded-lg shadow-md">
+        <h4 class="text-lg font-semibold text-lime-600 mb-2">Pengumuman</h4>
+        <p class="text-gray-700">Pendaftaran pelatihan komputer dasar dibuka hingga 10 Agustus 2025. Hubungi Kepala Dusun untuk info lebih lanjut.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="max-w-7xl mx-auto px-4 py-8 bg-[#2c2c2c] rounded-lg shadow-md">
+  <h2 class="text-2xl font-semibold text-center mb-6 text-[#e0e0e0]">Galeri Kegiatan</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div class="overflow-hidden rounded-lg shadow-md bg-[#161616]">
+      <img src="/images/kegiatan1.jpg" alt="Kegiatan 1" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300">
+    </div>
+    <div class="overflow-hidden rounded-lg shadow-md bg-[#161616]">
+      <img src="/images/kegiatan2.jpg" alt="Kegiatan 2" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300">
+    </div>
+    <div class="overflow-hidden rounded-lg shadow-md bg-[#161616]">
+      <img src="/images/kegiatan3.jpg" alt="Kegiatan 3" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300">
+    </div>
+  </div>
+</section>
+<section class="max-w-7xl mx-auto px-4 py-8 bg-[#2c2c2c] mt-8 rounded-lg shadow-md">
+  <h2 class="text-2xl font-semibold text-center mb-6 text-[#e0e0e0]">Media Sosial Kami</h2>
+  <div class="flex flex-col md:flex-row justify-center gap-8">
+    
+    <!-- Instagram -->
+    <div class="w-full md:w-1/2">
+      <h3 class="text-lg font-medium mb-2 text-[#6f9900]">Instagram</h3>
+      <iframe src="https://www.instagram.com/p/CIqXxPdBa2g/embed"
+              class="w-full h-[450px] border border-[#6f9900] rounded-lg"
+              frameborder="0" scrolling="no" allowtransparency="true">
+      </iframe>
+    </div>
+
+    <!-- YouTube -->
+    <div class="w-full md:w-1/2">
+      <h3 class="text-lg font-medium mb-2 text-[#6f9900]">YouTube</h3>
+      <iframe class="w-full h-[300px] md:h-[450px] border border-[#6f9900] rounded-lg"
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+  <!-- Script for mobile toggle -->
+  <script>
+    const toggleBtn = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    toggleBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+
+<footer class="bg-[#000000] text-white py-12">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 px-4">
+    
+    <!-- Tentang Desa -->
+    <div class="md:col-span-2">
+      <h4 class="text-xl font-bold mb-2">DESA RASAU JAYA TIGA</h4>
+      <p class="text-sm text-text-200">
+        RASAU JAYA – KUBU RAYA – KALIMANTAN BARAT<br><br>
+        Website desa dibangun dengan tujuan sebagai media pelayanan publik resmi desa. Dengan memanfaatkan website, penyelenggaraan pelayanan publik dapat dilakukan secara cepat dan mudah.
+      </p>
+      <a href="#" class="inline-block mt-4 text-accent hover:underline">Selengkapnya</a>
+      <div class="flex gap-4 mt-6">
+        <a href="#" class="bg-[#2c2c2c] p-2 rounded-full hover:bg-accent"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="bg-[#2c2c2c] p-2 rounded-full hover:bg-accent"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="bg-[#2c2c2c] p-2 rounded-full hover:bg-accent"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="bg-[#2c2c2c] p-2 rounded-full hover:bg-accent"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <!-- Tautan -->
+    <div>
+      <h4 class="text-lg font-semibold mb-3">Tautan</h4>
+      <ul class="text-text-200 space-y-1 text-sm">
+        <li><a href="#" class="hover:text-accent">Pemkab Kubu Raya</a></li>
+        <li><a href="#" class="hover:text-accent">Kecamatan Rasau Jaya</a></li>
+        <li><a href="#" class="hover:text-accent">Siskuedes Kubu Raya</a></li>
+        <li><a href="#" class="hover:text-accent">Dinas Pemdes</a></li>
+        <li><a href="#" class="hover:text-accent">SID Kemendesa</a></li>
+      </ul>
+    </div>
+
+    <!-- Kontak -->
+    <div>
+      <h4 class="text-lg font-semibold mb-3">Kontak Pemerintahan</h4>
+      <p class="text-text-200 text-sm leading-relaxed">
+        Jalan Bhakti Nomor 001<br>
+        Kode Pos 78382<br><br>
+        <strong>Telepon:</strong> -<br>
+        <strong>Email:</strong> rasaujayatiga@desakkr.id
+      </p>
+    </div>
+
+    <!-- Maps -->
+    <div>
+      <h4 class="text-lg font-semibold mb-3">Lokasi Desa</h4>
+      <div class="rounded overflow-hidden">
+        <iframe
+          class="w-full h-40 rounded-md"
+          frameborder="0"
+          scrolling="no"
+          marginheight="0"
+          marginwidth="0"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15945.698920706705!2d109.2420534!3d-0.130748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d59636ccfbc5f%3A0x1265a589acb90be4!2sRasau%20Jaya%20Tiga%2C%20Rasau%20Jaya%2C%20Kubu%20Raya%2C%20Kalimantan%20Barat!5e0!3m2!1sid!2sid!4v1690141125807!5m2!1sid!2sid"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+ <!-- Statistik -->
+<div class="max-w-7xl mx-auto mt-8 px-4">
+  <div class="bg-gray-800 text-white rounded-lg p-6">
+    <div class="flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 text-sm text-text-200">
+      <div class="flex items-center gap-2">
+        <span class="w-48 font-medium">Total Visitor Hari Ini</span>
+        <span class="font-bold text-white">23 Visitor</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-48 font-medium">Total Sepanjang Waktu</span>
+        <span class="font-bold text-white">1.286 Visitor</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Credit -->
+  <div class="border-t border-gray-700 mt-10 pt-6 text-center text-sm text-text-200">
+    <p>KKN-PPM UGM PERIODE 2 TAHUN 2025 KALIMANTAN BARAT_RASAU KEMBARA<br>WebsiteDesa 2.0</p>
+  </div>
+</footer>
+
+</body>
 </html>
