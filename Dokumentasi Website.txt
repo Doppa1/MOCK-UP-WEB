@@ -1,0 +1,195 @@
+﻿DOKUMENTASI FRONTEND WEBSITE DESA RASAU JAYA TIGA
+KKN-PPM UGM PERIODE 2 TAHUN 2025
+
+
+1. PENDAHULUAN
+   1. Nama Website : Website Desa Rasau Jaya Tiga
+   2. Tujuan/Fungsi Website
+Website ini dibuat sebagai sarana digital resmi pemerintah Desa Rasau Jaya Tiga untuk:
+      1. Menyampaikan informasi dan berita terkini kepada warga desa.
+      2. Menyediakan layanan administrasi desa secara online.
+      3. Menjadi media publikasi kegiatan, potensi, dan struktur pemerintahan desa.
+      4. Mendorong partisipasi masyarakat melalui transparansi dan keterbukaan informasi.
+   3. Deskripsi Singkat
+Website ini dikembangkan dengan menggunakan framework frontend modern berbasis ReactJS dan Tailwind CSS. Struktur halaman dibuat modular agar mudah dikembangkan dan diintegrasikan dengan backend pada masa mendatang. Website ini mencakup halaman-halaman penting seperti Beranda, Profil Desa (Sejarah, Geografis, Visi-Misi, Struktur), Galeri, Berita, Layanan Publik, dan Kontak. Dokumentasi ini berisi panduan teknis bagi pengembang dan administrator untuk pengelolaan dan pengembangan fitur lebih lanjut.
+
+
+2. STRUKTUR PROJEK
+WEB-DESA/
+├── node_modules/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │           ├── Header.jsx
+│   │           ├── Footer.jsx
+│   │           └── MainContent.jsx
+│   ├── pages/
+│   │         ├── Beranda.jsx
+│   │         ├── Berita.jsx
+│   │         ├── Galeri.jsx
+│   │         ├── Geografis.jsx
+│   │         ├── Kontak.jsx
+│   │         ├── Layanan.jsx
+│   │         ├── Sejarah.jsx
+│   │         ├── Struktur Desa.jsx
+│   │         └── Visi-misi.jsx
+│   ├── App.jsx
+│   ├── App.css
+│   ├── Main.css
+│   └── main.jsx
+├── index.html
+├── tailwind.config.js
+├── postcss.config.js
+├── package.json
+└── vite.config.js
+
+
+3. TEKNOLOGI YANG DIGUNAKAN
+Proyek "web-desa" menggunakan teknologi frontend modern untuk efisiensi dan performa optimal. Kombinasi React, Vite, dan Tailwind CSS populer karena kecepatan pengembangan dan kemudahan styling. Penggunaan ESLint juga menegaskan fokus pada kualitas dan konsistensi kode.
+
+
+Daftar Teknologi dan Versi yang Digunakan
+
+Kategori                    | Nama Teknologi               | Versi       | Fungsi & Keunggulan
+----------------------------+------------------------------+-------------+-------------------------------------------------------------
+Framework & Library (FE)    | React                        | ^19.1.0     | Library JavaScript untuk membangun UI modern berbasis komponen.
+                            | React DOM                    | ^19.1.0     | Merender komponen React ke HTML di browser.
+                            | React Router DOM             | ^7.7.1      | Navigasi halaman tanpa reload (SPA / Single-Page App).
+
+Alat Pengembangan (Dev Tools)| Vite                        | ^7.0.4      | Bundler & dev server super cepat (ES Modules + Rollup).
+                            | @vitejs/plugin-react         | ^4.6.0      | Plugin Vite untuk dukungan React + Fast Refresh.
+                            | ESLint                       | ^9.30.1     | Analisis kode JavaScript untuk deteksi error & konsistensi.
+                            | eslint-plugin-react-hooks    | ^5.2.0      | Memastikan penggunaan React Hooks yang benar.
+                            | eslint-plugin-react-refresh  | ^0.4.20     | Mendukung React Refresh untuk update instan.
+
+Styling                     | Tailwind CSS                 | ^3.4.3      | CSS utility-first framework (styling via kelas HTML).
+                            | PostCSS + Autoprefixer       | ^8.4.38 +   | Proses CSS & tambahkan vendor prefixes (-webkit-) untuk
+                            |                              | ^10.4.19    | kompatibilitas lintas browser.
+
+	
+
+4. PENJELASAN KOMPONEN
+   1. Header.jsx
+      1. Fungsi: Navigasi utama website (desktop & mobile)
+      2. Detail Kode:
+         1. Menggunakan useState untuk menyimpan status buka/tutup menu mobile.
+         2. Navigasi utama menggunakan <Link> dari react-router-dom agar tidak reload halaman.
+         3. Dropdown untuk menu Profil Desa dan Pemerintahan menggunakan struktur div.relative.group dengan hover untuk membuka menu.
+         4. Tombol hamburger mobile membuka menu navigasi vertikal di bawah header.
+   2. Footer.jsx
+      1. Fungsi: Menampilkan informasi dasar dan penutup halaman
+      2. Detail Kode:
+         1. Dibagi menjadi beberapa kolom (grid md:grid-cols-5).
+         2. Kolom 1: deskripsi desa + ikon media sosial (fab fa-facebook-f, dll).
+         3. Kolom 2: tautan ke instansi pemerintah (hardcoded list).
+         4. Kolom 3: kontak desa.
+         5. Kolom 4: embed Google Maps menggunakan iframe.
+         6. Statistik dan informasi kredit di bagian bawah.
+   3. MainContent.jsx
+      1. Fungsi: Konten utama halaman beranda
+      2. Detail Kode:
+         1. Section 1: Video latar belakang videoDesa (autoplay, muted, loop).
+         2. Section 2: 4 layanan utama ditampilkan melalui .map() dari array inline.
+         3. Section 3: Berita terbaru hardcoded satu card.
+         4. Section 4: Agenda dan pengumuman (hardcoded list).
+         5. Section 5: Sambutan Kepala Desa (gambar + teks statis).
+         6. Section 6: Profil Pegawai (4 pegawai dummy di-grid .map())
+         7. Section 7: Google MyMaps embed iframe untuk fasilitas umum.
+   4. Beranda.jsx
+      1. Fungsi: Halaman utama website
+      2. Detail Kode:
+         1. Mengimpor MainContent, Header, dan Footer, tetapi hanya MainContent yang dirender.
+   5. Galeri.jsx
+      1. Fungsi: Menampilkan dokumentasi kegiatan desa
+      2. Detail Kode:
+         1. Menggunakan array fotoGaleri[] untuk menyimpan data galeri (id, src, judul).
+         2. .map() digunakan untuk membuat grid galeri responsif 3 kolom.
+         3. Gambar diambil dari unsplash dengan keyword pencarian.
+   6. Kontak.jsx
+      1. Fungsi: Halaman untuk menghubungi desa
+      2. Detail Kode:
+         1. Hero section (judul dan breadcrumb).
+         2. Kolom kiri: Formulir kontak (nama, email, pesan) dengan HTML input dan textarea.
+         3. Kolom kanan: Informasi kontak dan jam layanan.
+   7. Layanan.jsx
+      1. Fungsi: Menampilkan daftar layanan administrasi desa
+      2. Detail Kode:
+         1. Data layanan disimpan dalam array layananList[], lalu ditampilkan dengan .map() sebagai card layanan.
+         2. Sidebar: fitur pencarian (belum aktif), informasi tambahan dan kontak admin.
+   8. Sejarah.jsx
+      1. Fungsi: Menampilkan sejarah desa
+      2. Detail Kode:
+         1. Tampilan gambar logo dan ilustrasi sejarah.
+         2. Paragraf panjang sejarah dalam elemen <p> dengan text-justify.
+         3. Sidebar berisi: cari berita, berita terbaru, dan data desa.
+   9. Struktur Desa.jsx
+      1. Fungsi: Menampilkan tabel struktur organisasi pemerintahan desa
+      2. Detail Kode:
+         1. Tabel terdiri dari jabatan dan nama (array inline berisi pasangan jabatan-nama).
+         2. Sidebar sama seperti Sejarah.jsx
+
+
+5. PENGEMBANGAN 
+Rencana Pengembangan Program / Website
+
+No  | Bidang Pengembangan         | Deskripsi                                                                                   | Teknologi / Tools yang Direkomendasikan                  
+----+-----------------------------+---------------------------------------------------------------------------------------------+--------------------------------------
+1   | Manajemen Konten Dinamis   | Memindahkan konten (berita, layanan, struktur desa) dari hardcoded ke CMS atau JSON.       | Netlify CMS, Strapi, Firebase Realtime 																DB               
+2   | Galeri Foto & Berita       | Menambahkan sistem unggah gambar dan input berita oleh admin.                              | Firebase Storage, React Dropzone, 																Tailwind UI Gallery    
+3   | Dashboard Admin            | Halaman login & panel admin untuk mengelola data situs.                                    | React Admin, Supabase Auth, Express API                 
+4   | Formulir & Pengiriman Email| Mengaktifkan form kontak dan menghubungkannya ke email atau backend.                       | EmailJS, Nodemailer, Google Sheets API                  
+5   | Statistik Pengunjung       | Menghitung dan menampilkan data real-time kunjungan situs.                                 | Google Analytics, Plausible Analytics                   
+6   | Peta Fasilitas Dinamis     | Menambahkan fitur klik untuk lokasi, deskripsi, dan icon berbeda.                          | Leaflet.js, Google Maps API                             
+7   | Pencarian & Filter Layanan | Menambahkan kolom pencarian aktif untuk layanan surat dan berita.                          | Fuse.js, Algolia                                        
+8   | Bahasa Ganda (Multibahasa) | Menyediakan opsi bahasa (Indonesia dan Inggris).                                           | react-i18next, JSON translation loader                  
+9   | Notifikasi Pop-up          | Menampilkan pengumuman penting secara real-time di homepage.                               | Toastify, Modal dengan Tailwind CSS                     
+10  | Mobile Optimization & PWA  | Mengoptimalkan UI mobile dan memungkinkan akses offline.                                   | Tailwind CSS, Vite PWA Plugin                           
+11  | Pengembangan Backend API   | Membuat backend untuk menyimpan dan mengelola data dinamis dari frontend.                  | Express.js, Node.js, MongoDB / Supabase 																/ Firestore     
+12  | Autentikasi Admin          | Autentikasi untuk admin agar dapat login dan mengedit konten melalui dashboard.            | Supabase Auth, Firebase Auth, JWT 																Middleware            
+	
+
+Menu / Halaman Tambahan Sesuai Kebutuhan Desa
+Berikut ini adalah daftar menu yang dapat ditambahkan berdasarkan kebutuhan pemerintahan dan masyarakat Desa Rasau Jaya Tiga:
+* Aspirasi Masyarakat – Formulir untuk menyampaikan saran dan keluhan.
+* Data Kependudukan – Statistik jumlah penduduk berdasarkan dusun, umur, pekerjaan.
+* UMKM & Produk Lokal – Katalog produk unggulan warga desa.
+* Laporan Keuangan Desa – Transparansi anggaran, APBDes, dan realisasi.
+* Dokumen Unduhan – Tempat mengunduh surat-surat, form pengajuan, brosur, dll.
+* Agenda & Kalender Kegiatan – Tampilan kalender kegiatan resmi desa.
+* Berita Dusun/Halaman Artikel kreativitas warga – Subhalaman berita dari tiap dusun/hasil artikel kreatif setiap warga.
+
+
+6. KEAMANAN
+Hal-hal yang Perlu Dipersiapkan untuk Keamanan Digital Website
+Keamanan digital sangat penting agar data desa tidak disalahgunakan dan situs tetap aman dari serangan. Berikut hal-hal yang perlu dipersiapkan:
+Aspek Keamanan Digital - Rencana & Tindakan Pencegahan
+
+No  | Aspek Keamanan Digital       | Tindakan yang Direkomendasikan
+----+------------------------------+---------------------------------------------------------------------------
+1   | HTTPS & Sertifikat SSL       | Pastikan domain menggunakan HTTPS dengan sertifikat SSL agar data dienkripsi.
+2   | Autentikasi Admin            | Gunakan sistem login aman dengan proteksi password dan token (JWT atau session).
+3   | Validasi Input Form          | Selalu validasi input dari pengguna untuk mencegah XSS, SQL Injection, dan spam.
+4   | Rate Limiting & Captcha      | Gunakan batasan percobaan login dan CAPTCHA untuk mencegah brute-force dan bot.
+5   | Backup Rutin                 | Lakukan backup otomatis database dan file minimal seminggu sekali.
+6   | Update Dependencies          | Periksa dan perbarui dependensi (npm packages) secara berkala untuk mencegah kerentanan.
+7   | Role-based Access Control    | Batasi fitur yang bisa diakses oleh pengguna dengan role tertentu (admin, editor, viewer).
+8   | Audit Log                    | Simpan log aktivitas admin untuk keperluan monitoring dan keamanan.
+9   | Firewall & Hosting Aman      | Gunakan layanan hosting dengan proteksi DDoS dan firewall bawaan.
+10  | Training Admin               | Edukasi admin desa soal phishing, password kuat, dan penggunaan dashboard yang aman.
+	
+
+
+
+Area Rawan Kerentanan & Jenis Serangan Umum
+Analisis Kerentanan dan Solusi Mitigasi Keamanan
+
+Area / Komponen         | Potensi Kerentanan            | Jenis Serangan Umum                | Solusi atau Mitigasi
+------------------------+-------------------------------+------------------------------------+------------------------------------------------------------
+Form Kontak (Kontak.jsx)| Input tidak divalidasi        | XSS, Email Injection, Spam Bot     | Validasi input, gunakan reCAPTCHA, filter karakter berbahaya
+Login Admin (dev)       | Autentikasi tidak aman        | Brute Force, Credential Stuffing   | Hash password, gunakan 2FA/JWT, rate limiting
+Upload Gambar (Galeri)  | Upload file tanpa pengecekan  | File Malware, Overwrite, DOS       | Validasi ekstensi & ukuran file, gunakan file scanner
+Backend API             | Endpoint tanpa otorisasi      | Unauthorized Access, Data Leakage  | Middleware auth, validasi token, batasi rate akses
+Dependensi Lama         | Library tidak diperbarui      | Exploitable Vulnerability          | Gunakan npm audit, update rutin
+URL Routing             | Jalur admin terekspos         | URL Guessing, Path Traversal       | Proteksi autentikasi untuk halaman sensitif
+Hosting / Database      | Server default atau terbuka   | Data breach, defacing, ransomware  | Hosting aman, backup terenkripsi, nonaktifkan default ports

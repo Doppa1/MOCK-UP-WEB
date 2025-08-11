@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Desa</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+  </head>
+
+  <body class="bg-white text-gray-900">
+
+    <!-- Google Translate Widget -->
+    <div id="google_translate_element"></div>
+
+    <!-- React App -->
+    <div id="root"></div>
+
+    <!-- Vite main script -->
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'id',
+          includedLanguages: 'en,id',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+      }
+    </script>
+
+    <!-- Load Translate API -->
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Custom Language Switch Confirmation -->
+    <script>
+      document.addEventListener("click", function (e) {
+        const el = e.target.closest(".goog-te-menu2-item span.text");
+        if (el) {
+          e.preventDefault();
+          const selectedLang = el.innerText.trim();
+          const message = selectedLang === "English"
+            ? "Do you want to switch the language to English?"
+            : "Apakah Anda ingin mengganti bahasa ke Bahasa Indonesia?";
+          if (confirm(message)) {
+            el.click();
+          }
+        }
+      }, true);
+    </script>
+
+    <style>
+      #google_translate_element {
+        position: fixed;
+        top: 80px;
+        right: 10px;
+        z-index: 30;
+        background-color: white;
+        border-radius: 6px;
+        padding: 4px 6px;
+      }
+
+      @media (max-width: 768px) {
+        #google_translate_element {
+          top: auto;
+          bottom: 10px;
+          right: 10px;
+        }
+      }
+
+      .goog-te-banner-frame.skiptranslate,
+      .goog-te-gadget-icon {
+        display: none !important;
+      }
+
+      body {
+        top: 0px !important;
+      }
+    </style>
+  </body>
+</html>
