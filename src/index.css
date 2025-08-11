@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* src/index.css */
+.nav-link {
+  @apply text-white py-2 px-3 font-medium transition-all duration-200;
+}
+
+.nav-link:hover {
+  color: #8DB600;
+}
+
+.group:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1a1a1a;
+  min-width: 10rem;
+  z-index: 50;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#google_translate_element {
+  z-index: 40;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+.goog-te-gadget {
+  font-size: 0.9rem;
+  font-family: sans-serif;
+}
